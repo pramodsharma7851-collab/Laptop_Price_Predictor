@@ -3,6 +3,9 @@ import pickle
 #env with python 3.11.9 using .exe file
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 pipe=pickle.load(open('pipe1.pkl','rb'))
 df=pickle.load(open('df1.pkl','rb'))
 #_______________________X_ background and frontend_________________________________________________________________________________________
@@ -133,7 +136,7 @@ if "active_view" not in st.session_state:
   st.session_state["active_view"] = "Predictor"
 
 # 4 Navigation Buttons at the Top
-col1, col2, col3 = st.columns(3)
+col1, col2= st.columns(2)
 
 if col1.button(
     "🔮 Price Predictor",
@@ -152,15 +155,15 @@ if col2.button(
     else "secondary",
 ):
   st.session_state["active_view"] = "Insights"
-
-if col3.button(
-    "⚡ Model Metrics",
-    use_container_width=True,
-    type="primary"
-    if st.session_state["active_view"] == "Metrics"
-    else "secondary",
-):
-  st.session_state["active_view"] = "Metrics"
+#
+# if col3.button(
+#     "⚡ Model Metrics",
+#     use_container_width=True,
+#     type="primary"
+#     if st.session_state["active_view"] == "Metrics"
+#     else "secondary",
+# ):
+#   st.session_state["active_view"] = "Metrics"
 
 
 st.divider()
@@ -287,77 +290,180 @@ elif st.session_state["active_view"] == "Insights":
             unsafe_allow_html=True,
         )
 
-  st.write("")
-  st.markdown("#### Avg Pricing by Laptop Category")
-  category_df = pd.DataFrame({
-      "Chassis Category": [
-          "Netbook",
-          "Notebook",
-          "2 in 1 Convertible",
-          "Ultrabook",
-          "Gaming",
-          "Workstation",
-      ],
-      "Median Price (₹)": [38000, 42000, 68500, 84000,92000, 115000],
-  })
-  st.bar_chart(category_df.set_index("Chassis Category"))
-  st.write("")
-  st.markdown("#### Avg Pricing by GPU Category")
-  category_df = pd.DataFrame({
-      "Chassis Category": [
-          "Intel",
-          "Nvidia",
-          "AMD",
 
-      ],
-      "Avg Price Price (₹)": [53000, 41000, 76000],
-  })
-  st.bar_chart(category_df.set_index("Chassis Category"))
-  st.write("")
-  st.markdown("#### Avg Pricing by Ops Category")
-  category_df = pd.DataFrame({
-      "Chassis Category": [
-          "MAC",
-          "Windows",
-          "Linux",
-          "Others",
+  st.title("Avg Pricing by Laptop Type")
 
-      ],
-      "Mean Price (₹)": [84000, 62000, 35000, 37000],
-  })
-  st.bar_chart(category_df.set_index("Chassis Category"))
+  fig, ax = plt.subplots()
 
-# VIEW 3: MODEL METRICS
-elif st.session_state["active_view"] == "Metrics":
-  st.subheader("Model Validation & Performance")
+  sns.barplot(
+      x=df["TypeName"],
+      y=df["Price"],
+      ax=ax
+  )
+  ax.tick_params(axis="x", rotation=90)
+  st.pyplot(fig)
+  plt.close(fig),
 
-  met1, met2, met3 = st.columns(3)
-  with met1:
-    st.metric("Generalization R² Score", "91% - 93.8%", "Held-out on real Data")
-  # with met2:
-  #   st.metric("Mean Absolute Error (MAE)", "~₹5,400", "Across all tiers")
-  with met3:
-    st.metric(
-        "HP Victus Real Query Error", "+3.52%", "₹84k predicted vs ₹81.1k real"
-    )
+  st.title("Avg Pricing by GPU")
 
-  st.markdown("---")
-  st.markdown("#### Feature Importance Breakdown")
-  feature_df = pd.DataFrame({
-      "Feature Component": [
-          "CPU Model & Speed",
-          "RAM Capacity",
+  fig, ax = plt.subplots()
 
-          "Weight",
-          "Storage Type (SSD)",
-          "Touchscreen",
-          "Ips Panel",
-          "PPI"
-          "Resolution & Panel",
-      ],
-      "Importance (%)": [41, 73, 23, 33.5,18,27,48],
-  })
-  st.table(feature_df)
+  sns.barplot(
+      x=df["Gpu_brand"],
+      y=df["Price"],
+      ax=ax
+  )
+  ax.tick_params(axis="x", rotation=90)
+  st.pyplot(fig)
+  plt.close(fig),
+
+  st.title("Avg Pricing by CPU Type")
+
+  fig, ax = plt.subplots()
+
+  sns.barplot(
+      x=df["Cpu_brand"],
+      y=df["Price"],
+      ax=ax
+  )
+  ax.tick_params(axis="x", rotation=90)
+  st.pyplot(fig)
+  plt.close(fig),
+
+  #
+
+  st.title("Avg Pricing by Ops category")
+
+  fig, ax = plt.subplots()
+
+  sns.barplot(
+      x=df["ops"],
+      y=df["Price"],
+      ax=ax
+  )
+  ax.tick_params(axis="x", rotation=90)
+  st.pyplot(fig)
+  plt.close(fig),
+  # })
+  # st.bar_chart(category_df.set_index("Chassis Category"))
+
+elif st.session_state["active_view"] == "Insights":
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+
+    st.title('Ops vs price')
+    sns.barplot(x=df['ops'],y=df['Price'])
+    plt.xticks(rotation=90)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# _____________________________________X trimmed_code__________________________________________
+
+
+# # VIEW 3: MODEL METRICS
+# elif st.session_state["active_view"] == "Metrics":
+#   st.subheader("Model Validation & Performance")
+#
+#   met1, met2, met3 = st.columns(3)
+#   with met1:
+#     st.metric("Generalization R² Score", "91% - 93.8%", "Held-out on real Data")
+#   # with met2:
+#   #   st.metric("Mean Absolute Error (MAE)", "~₹5,400", "Across all tiers")
+#   with met3:
+#     st.metric(
+#         "HP Victus Real Query Error", "+3.52%", "₹84k predicted vs ₹81.1k real"
+#     )
+#
+#   st.markdown("---")
+#   st.markdown("#### Feature Importance Breakdown")
+#   feature_df = pd.DataFrame({
+#       "Feature Component": [
+#           "CPU Model & Speed",
+#           "RAM Capacity",
+#
+#           "Weight",
+#           "Storage Type (SSD)",
+#           "Touchscreen",
+#           "Ips Panel",
+#           "PPI"
+#           "Resolution & Panel",
+#       ],
+#       "Importance (%)": [41, 73, 23, 33.5,18,27,48],
+#   })
+#   st.table(feature_df)
 
 
 
