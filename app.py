@@ -255,14 +255,7 @@ elif st.session_state["active_view"] == "Insights":
         " ASUS (11.5%)</p></div>",
         unsafe_allow_html=True,
     )
-  # with m2:
-  #   st.markdown(
-  #       "<div class='stat-card'><h4 style='color:#94A3B8; margin:0;'>Median"
-  #       " Market Price</h4><h2 style='color:#34D399; margin:8px 0;'>₹52,055</h2><p"
-  #       " style='color:#64748B; margin:0;'>Interquartile: ₹31.9k –"
-  #       " ₹79.2k</p></div>",
-  #       unsafe_allow_html=True,
-  #   )
+
   with m2:
     st.markdown(
         "<div class='card-box'><h4 style='color:#94A3B8; margin:0;'>Dominant"
@@ -344,8 +337,7 @@ elif st.session_state["active_view"] == "Insights":
   ax.tick_params(axis="x", rotation=90)
   st.pyplot(fig)
   plt.close(fig),
-  # })
-  # st.bar_chart(category_df.set_index("Chassis Category"))
+
 
 elif st.session_state["active_view"] == "Insights":
     import seaborn as sns
@@ -390,154 +382,7 @@ elif st.session_state["active_view"] == "Insights":
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # _____________________________________X trimmed_code__________________________________________
-
-
-# # VIEW 3: MODEL METRICS
-# elif st.session_state["active_view"] == "Metrics":
-#   st.subheader("Model Validation & Performance")
-#
-#   met1, met2, met3 = st.columns(3)
-#   with met1:
-#     st.metric("Generalization R² Score", "91% - 93.8%", "Held-out on real Data")
-#   # with met2:
-#   #   st.metric("Mean Absolute Error (MAE)", "~₹5,400", "Across all tiers")
-#   with met3:
-#     st.metric(
-#         "HP Victus Real Query Error", "+3.52%", "₹84k predicted vs ₹81.1k real"
-#     )
-#
-#   st.markdown("---")
-#   st.markdown("#### Feature Importance Breakdown")
-#   feature_df = pd.DataFrame({
-#       "Feature Component": [
-#           "CPU Model & Speed",
-#           "RAM Capacity",
-#
-#           "Weight",
-#           "Storage Type (SSD)",
-#           "Touchscreen",
-#           "Ips Panel",
-#           "PPI"
-#           "Resolution & Panel",
-#       ],
-#       "Importance (%)": [41, 73, 23, 33.5,18,27,48],
-#   })
-#   st.table(feature_df)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #import the model
 # pipe=pickle.load(open('pipe1.pkl','rb'))
