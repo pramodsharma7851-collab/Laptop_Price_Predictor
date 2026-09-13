@@ -340,9 +340,6 @@ elif st.session_state["active_view"] == "Insights":
 
 
 elif st.session_state["active_view"] == "Insights":
-    import seaborn as sns
-    import matplotlib.pyplot as plt
-
     st.title('Ops vs price')
     sns.barplot(x=df['ops'],y=df['Price'])
     plt.xticks(rotation=90)
