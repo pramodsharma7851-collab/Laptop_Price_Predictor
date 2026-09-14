@@ -136,7 +136,7 @@ if "active_view" not in st.session_state:
   st.session_state["active_view"] = "Predictor"
 
 # 4 Navigation Buttons at the Top
-col1, col2= st.columns(2)
+col1, col2,col3= st.columns(3)
 
 if col1.button(
     "🔮 Price Predictor",
@@ -155,15 +155,15 @@ if col2.button(
     else "secondary",
 ):
   st.session_state["active_view"] = "Insights"
-#
-# if col3.button(
-#     "⚡ Model Metrics",
-#     use_container_width=True,
-#     type="primary"
-#     if st.session_state["active_view"] == "Metrics"
-#     else "secondary",
-# ):
-#   st.session_state["active_view"] = "Metrics"
+
+if col3.button(
+    "ℹ️ About",
+    use_container_width=True,
+    type="primary"
+    if st.session_state["active_view"] == "Metrics"
+    else "secondary",
+):
+  st.session_state["active_view"] = "How it works"
 
 
 st.divider()
@@ -240,6 +240,10 @@ if st.session_state["active_view"] == "Predictor":
 
   # st.title('Prdicted price is : ',int(np.exp(prediction))[0] )
   st.title(f"Predicted price is : {int(np.exp(prediction)[0])}")
+
+
+
+
 
 
 # VIEW 2: MARKET INSIGHTS__________________________Some Analysis on the basis of data_________________________
@@ -343,7 +347,492 @@ elif st.session_state["active_view"] == "Insights":
     st.title('Ops vs price')
     sns.barplot(x=df['ops'],y=df['Price'])
     plt.xticks(rotation=90)
+#___________________________________________How it Works_______________________________________________________________
+elif st.session_state["active_view"] == "How it works":
 
+
+
+    st.html("""
+     <style>
+    
+     .how-wrapper {
+         width: 100%;
+         max-width: 900px;
+         margin: 80px auto 30px auto;
+         text-align: center;
+     }
+    
+     /* Main heading */
+     .how-title {
+         font-size: 36px;
+         font-weight: 700;
+         margin-bottom: 8px;
+         color: #f5f5f5;
+     }
+    
+     .how-title span {
+         color: #8b7cff;
+     }
+    
+     .how-subtitle {
+         color: #8f98a8;
+         font-size: 16px;
+         margin-bottom: 35px;
+     }
+    
+    
+     /* Individual step card */
+     .how-card {
+         width: 90%;
+         max-width: 700px;
+         margin: 0 auto;
+    
+         display: flex;
+         align-items: center;
+    
+         text-align: left;
+    
+         padding: 22px 25px;
+    
+         background: rgba(15, 22, 40, 0.85);
+    
+         border: 1px solid #27375c;
+         border-radius: 14px;
+    
+         box-sizing: border-box;
+    
+         transition: all 0.25s ease;
+     }
+    
+     /* Hover effect */
+     .how-card:hover {
+         transform: translateY(-2px);
+         border-color: #7669e8;
+         box-shadow: 0 8px 25px rgba(80, 70, 180, 0.15);
+     }
+    
+    
+     /* Left icon */
+     .how-icon {
+         width: 55px;
+         height: 55px;
+    
+         min-width: 55px;
+    
+         display: flex;
+         align-items: center;
+         justify-content: center;
+    
+         border-radius: 12px;
+    
+         background: #111d38;
+    
+         font-size: 26px;
+    
+         margin-right: 18px;
+     }
+    
+    
+     /* Step number */
+     .how-number {
+         width: 38px;
+         height: 38px;
+    
+         min-width: 38px;
+    
+         border-radius: 50%;
+    
+         display: flex;
+         align-items: center;
+         justify-content: center;
+    
+         font-size: 14px;
+         font-weight: 700;
+    
+         color: white;
+    
+         margin-right: 18px;
+     }
+    
+    
+     /* Step content */
+     .how-content {
+         flex: 1;
+     }
+    
+     .how-heading {
+         font-size: 19px;
+         font-weight: 650;
+         color: #f2f2f2;
+         margin-bottom: 6px;
+     }
+    
+     .how-text {
+         font-size: 14px;
+         line-height: 1.55;
+         color: #8f98a8;
+     }
+    
+    
+     /* Number colors */
+     .n1 {
+         background: #635bff;
+     }
+    
+     .n2 {
+         background: #27c99a;
+     }
+    
+     .n3 {
+         background: #f2a33a;
+     }
+    
+     .n4 {
+         background: #d957b6;
+     }
+    
+     .n5 {
+         background: #31bce8;
+     }
+    
+    
+     /* Arrow */
+     .how-arrow {
+         height: 42px;
+    
+         display: flex;
+         align-items: center;
+         justify-content: center;
+    
+         font-size: 27px;
+    
+         color: #7569e8;
+     }
+    
+    
+     /* Bottom line */
+     .how-footer {
+         width: 90%;
+         max-width: 700px;
+    
+         margin: 45px auto 0 auto;
+    
+         padding-top: 20px;
+    
+         border-top: 1px solid #252c3a;
+    
+         color: #737b8c;
+    
+         font-size: 13px;
+     }
+    
+    
+     /* Mobile */
+     @media (max-width: 700px) {
+    
+         .how-wrapper {
+             margin-top: 60px;
+         }
+    
+         .how-title {
+             font-size: 30px;
+         }
+    
+         .how-card {
+             width: 94%;
+             padding: 18px;
+         }
+    
+         .how-icon {
+             width: 48px;
+             height: 48px;
+             min-width: 48px;
+             font-size: 22px;
+             margin-right: 12px;
+         }
+    
+         .how-number {
+             width: 34px;
+             height: 34px;
+             min-width: 34px;
+             font-size: 12px;
+             margin-right: 12px;
+         }
+    
+         .how-heading {
+             font-size: 17px;
+         }
+    
+         .how-text {
+             font-size: 13px;
+         }
+    
+     }
+    
+     </style>
+    
+    
+     <div class="how-wrapper">
+    
+         <!-- Heading -->
+    
+         <div class="how-title">
+             💻 How It <span>Works</span>
+         </div>
+    
+         <div class="how-subtitle">
+             From laptop specifications to estimated price
+         </div>
+    
+    
+         <!-- STEP 1 -->
+    
+         <div class="how-card">
+    
+             <div class="how-icon">
+                 🗄️
+             </div>
+    
+             <div class="how-number n1">
+                 01
+             </div>
+    
+             <div class="how-content">
+    
+                 <div class="how-heading">
+                     Data Loading
+                 </div>
+    
+                 <div class="how-text">
+                         A dataset of more than 3000 laptops containing specifications
+        such as brand, processor, RAM, storage, display and price..
+                 </div>
+    
+             </div>
+    
+         </div>
+    
+    
+         <!-- Arrow -->
+         <div class="how-arrow">
+             ↓
+         </div>
+    
+    
+    
+         <!-- STEP 2 -->
+    
+         <div class="how-card">
+    
+             <div class="how-icon">
+                 🔍
+             </div>
+    
+             <div class="how-number n2">
+                 02
+             </div>
+    
+             <div class="how-content">
+    
+                 <div class="how-heading">
+                     EDA(Investigation of Data)
+                 </div>
+    
+                 <div class="how-text">
+                    We explore the dataset, understand feature relationships,Detecting Missing Values,
+         Visualizing the relationship between Features and Price using Matplotlib,Seaborn and Plotly.
+                 </div>
+    
+             </div>
+    
+         </div>
+    
+         <!-- Arrow -->
+    
+         <div class="how-arrow">
+             ↓
+         </div>
+    
+    
+    
+         <!-- STEP 2 -->
+    
+         <div class="how-card">
+    
+             <div class="how-icon">
+                 ⚙️
+             </div>
+    
+             <div class="how-number n2">
+                 03
+             </div>
+    
+             <div class="how-content">
+    
+                 <div class="how-heading">
+                     Data Cleaning & Feature Engineering
+                 </div>
+    
+                 <div class="how-text">
+                     Raw features are cleaned and useful information is
+                     extracted, such as CPU brand, RAM, weight, SSD storage
+                     and screen PPI.
+                 </div>
+    
+             </div>
+    
+         </div>
+    
+    
+         <!-- Arrow -->
+    
+         <div class="how-arrow">
+             ↓
+         </div>
+    
+    
+         <!-- STEP 3 -->
+    
+         <div class="how-card">
+    
+             <div class="how-icon">
+                🔄
+             </div>
+    
+             <div class="how-number n3">
+                 04
+             </div>
+    
+             <div class="how-content">
+    
+                 <div class="how-heading">
+                     Column Transformation
+                 </div>
+    
+                 <div class="how-text">
+                     Categorical features are converted into Numerical Columns using
+                     One-Hot Encoding .
+                 </div>
+    
+             </div>
+    
+         </div>
+    
+    
+         <!-- Arrow -->
+    
+         <div class="how-arrow">
+             ↓
+         </div>
+    
+    
+         <!-- STEP 4 -->
+    
+         <div class="how-card">
+    
+             <div class="how-icon">
+                 🔗
+             </div>
+    
+             <div class="how-number n4">
+                 05
+             </div>
+    
+             <div class="how-content">
+    
+                 <div class="how-heading">
+                     Machine Learning Pipeline
+                 </div>
+    
+                 <div class="how-text">
+                     ColumnTransformer is connected with the 
+                     machine learning model through a Pipeline .
+                 </div>
+    
+             </div>
+    
+         </div>
+    
+    
+         <!-- Arrow -->
+    
+         <div class="how-arrow">
+             ↓
+         </div>
+    
+    
+         <!-- STEP 5 -->
+    
+         <div class="how-card">
+    
+             <div class="how-icon">
+                 🎯
+             </div>
+    
+             <div class="how-number n5">
+                 06
+             </div>
+    
+             <div class="how-content">
+    
+                 <div class="how-heading">
+                     Price Prediction
+                 </div>
+    
+                 <div class="how-text">
+               Multiple models were evaluated using R² Score and MAE to select the best-performing model.
+               Stacking Regressor performed best with R² Score .925 .
+                     
+                 </div>
+    
+             </div>
+    
+         </div>
+         
+         <div class="how-arrow">
+             ↓
+         </div>
+    
+    
+         <!-- STEP 4 -->
+    
+         <div class="how-card">
+    
+             <div class="how-icon">
+                 🌐
+             </div>
+    
+             <div class="how-number n4">
+                 Live
+             </div>
+    
+             <div class="how-content">
+    
+                 <div class="how-heading">
+                     Deployment
+                 </div>
+    
+                 <div class="how-text">
+                     The Model is Converted to a webapp using the streamlit and Deployed on Streamlit Cloud and Git hub.
+                 </div>
+    
+             </div>
+    
+         </div>
+    
+    
+         <!-- Arrow -->
+    
+    
+         <!-- Footer -->
+    
+         <div class="how-footer">
+             💻 Laptop Price Predictor &nbsp; • &nbsp;
+             Built with Streamlit 
+         </div>
+    
+     </div>
+     """)
 
 
 
